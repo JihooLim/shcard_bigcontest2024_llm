@@ -151,7 +151,7 @@ def generate_response_with_priority(question, df, embeddings, model, embed_text,
     # 1. FAISS 인덱스를 통해 질문과 유사한 데이터를 검색
     try:
         index = load_faiss_index(index_path)
-    except FileNotFoundError as e:
+    except:
         st.error(f"FAISS 인덱스를 찾을 수 없습니다: {e}")
         return None
     
@@ -183,7 +183,7 @@ def generate_response_with_priority(question, df, embeddings, model, embed_text,
         # Gemini 모델에 질문을 전달하고 답변 생성
         prompt = f"질문: {question} 특히 {local_choice}을 선호해"
         response = model.generate_content(prompt)
-        except Exception as e:
+        except:
             st.error(f"Gemini에서 답변을 생성하는 중 오류가 발생했습니다: {e}")
             return None
         return response
