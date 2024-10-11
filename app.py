@@ -196,16 +196,16 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
         filtered_df = filtered_df[filtered_df['영업시간'].apply(lambda x: isinstance(eval(x), list) and any(hour in eval(x) for hour in [23, 24, 1, 2, 3, 4]))].reset_index(drop=True)
 
        # 2. 데이터가 있을 경우, 이를 기반으로 답변 생성
-if not filtered_df.empty:
-    response_text = "\n".join([row['text'] for _, row in filtered_df.iterrows()])
-    return f"다음과 같은 추천이 있습니다:\n{response_text}"
+    if not filtered_df.empty:
+        response_text = "\n".join([row['text'] for _, row in filtered_df.iterrows()])
+        return f"다음과 같은 추천이 있습니다:\n{response_text}"
 
     # 3. 데이터가 없을 경우, Gemini에게 질문을 넘겨서 대답을 생성
-else:
-    # Gemini 모델에 질문을 전달하고 답변 생성
-    prompt = f"질문: {question} 특히 {local_choice}을 선호해"
-    response = model.generate_content(prompt)
-    return response
+    else:
+        # Gemini 모델에 질문을 전달하고 답변 생성
+        prompt = f"질문: {question} 특히 {local_choice}을 선호해"
+        response = model.generate_content(prompt)
+        return response
 
 # 유저 질문 입력 처리
 if prompt := st.chat_input():
