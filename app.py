@@ -23,10 +23,6 @@ genai.configure(api_key=GOOGLE_API_KEY)
 # Gemini 모델 선택
 model = genai.GenerativeModel("gemini-1.5-flash")
 
-try:
-    model = genai.GenerativeModel("gemini-1.5-flash")
-except Exception as e:
-    st.error(f"Gemini 모델 로드 중 오류가 발생했습니다: {e}")
 
 # CSV 파일 로드
 ## 자체 전처리를 거친 데이터 파일 활용
