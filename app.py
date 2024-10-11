@@ -97,7 +97,7 @@ st.write("#흑돼지 #제철 생선회 #해물라면 #스테이크 #한식 #중�
 
 st.write("")
 
-image_path = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTHBMuNn2EZw3PzOHnLjDg_psyp-egZXcclWbiASta57PBiKwzpW5itBNms9VFU8UwEMQ&usqp=CAU"
+image_path = "https://pimg.mk.co.kr/news/cms/202409/22/news-p.v1.20240922.a626061476c54127bbe4beb0aa12d050_P1.png"
 image_html = f"""
 <div style="display: flex; justify-content: center;">
     <img src="{image_path}" alt="centered image" width="50%">
