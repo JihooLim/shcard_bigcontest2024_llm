@@ -16,11 +16,8 @@ module_path = './modules'
 # Gemini 설정
 import google.generativeai as genai
 
-# import shutil
-# os.makedirs("/root/.streamlit", exist_ok=True)
-# shutil.copy("secrets.toml", "/root/.streamlit/secrets.toml")
+GOOGLE_API_KEY = st.secrets["AIzaSyBx1J1pS9k7bNA7R-5fkgAK8K7xQxd7Fes"]
 
-GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 
 genai.configure(api_key=GOOGLE_API_KEY)
 
@@ -188,9 +185,6 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
     # 웹페이지의 사이드바에서 선택하는 영업시간, 현지인 맛집 조건 구현
 
     # 영업시간 옵션
-    # 필터링 조건으로 활용
-
-    # 영업시간 조건을 만족하는 가게들만 필터링
     if time == '아침':
         filtered_df = filtered_df[filtered_df['영업시간'].apply(lambda x: isinstance(eval(x), list) and any(hour in eval(x) for hour in range(5, 12)))].reset_index(drop=True)
     elif time == '점심':
@@ -228,44 +222,4 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
         reference_info += f"{row['text']}\n"
 
     # 응답을 받아오기 위한 프롬프트 생성
-    prompt = f"질문: {question} 특히 {local_choice}을 선호해\n참고할 정보:\n{reference_info}\n응답:"
-
-    if print_prompt:
-        print('-----------------------------'*3)
-        print(prompt)
-        print('-----------------------------'*3)
-
-    # 응답 생성
-    response = model.generate_content(prompt)
-
-    return response
-
-
-# User-provided prompt
-if prompt := st.chat_input(): # (disabled=not replicate_api):
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.write(prompt)
-
-# Generate a new response if last message is not from assistant
-if st.session_state.messages[-1]["role"] != "assistant":
-    with st.chat_message("assistant"):
-        with st.spinner("Thinking..."):
-            # response = generate_llama2_response(prompt)
-            response = generate_response_with_faiss(prompt, df, embeddings, model, embed_text, time, local_choice)
-            placeholder = st.empty()
-            full_response = ''
-
-            # 만약 response가 GenerateContentResponse 객체라면, 문자열로 변환하여 사용합니다.
-            if isinstance(response, str):
-                full_response = response
-            else:
-                full_response = response.text  # response 객체에서 텍스트 부분 추출
-
-            # for item in response:
-            #     full_response += item
-            #     placeholder.markdown(full_response)
-
-            placeholder.markdown(full_response)
-    message = {"role": "assistant", "content": full_response}
-    st.session_state.messages.append(message)
+    prompt = f"질문: {question} 특히 {local_choice}을 선호해\n참고할 정보:\n{reference_info}\n
