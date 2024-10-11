@@ -114,7 +114,7 @@ st.write("")
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():
     st.session_state.messages = [{"role": "assistant", "content": "어드런 식당 찾으시쿠과?"}]
-
+ 
 # Display or clear chat messages
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
