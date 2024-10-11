@@ -195,12 +195,31 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
     elif time == '밤':
         filtered_df = filtered_df[filtered_df['영업시간'].apply(lambda x: isinstance(eval(x), list) and any(hour in eval(x) for hour in [23, 24, 1, 2, 3, 4]))].reset_index(drop=True)
 
-    # 필터링 후 가게가 없으면 메시지를 반환
-    if filtered_df.empty:
-        return f"현재 선택하신 시간대({time})에는 영업하는 가게가 없어요 ㅠㅠ."
+       # 2. 데이터가 있을 경우, 이를 기반으로 답변 생성
+if not filtered_df.empty:
+    response_text = "\n".join([row['text'] for _, row in filtered_df.iterrows()])
+    return f"다음과 같은 추천이 있습니다:\n{response_text}"
 
-    filtered_df = filtered_df.reset_index(drop=True).head(k)
+    # 3. 데이터가 없을 경우, Gemini에게 질문을 넘겨서 대답을 생성
+else:
+    # Gemini 모델에 질문을 전달하고 답변 생성
+    prompt = f"질문: {question} 특히 {local_choice}을 선호해"
+    response = model.generate_content(prompt)
+    return response
 
+# 유저 질문 입력 처리
+if prompt := st.chat_input():
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.write(prompt)
+
+    # Generate response with priority (FAISS -> Gemini)
+    if st.session_state.messages[-1]["role"] != "assistant":
+        with st.chat_message("assistant"):
+            with st.spinner("답변을 생성 중입니다..."):
+                response = generate_response_with_priority(prompt, df, embeddings, model, embed_text, time, local_choice)
+                st.write(response)
+                st.session_state.messages.append({"role": "assistant", "content": response})
 
     # 현지인 맛집 옵션
 
