@@ -222,3 +222,43 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
 
     # 응답을 받아오기 위한 프롬프트 생성
     prompt = f"질문: {question} 특히 {local_choice}을 선호해\n참고할 정보:\n{reference_info}\n"
+
+    if print_prompt:
+        print('-----------------------------'*3)
+        print(prompt)
+        print('-----------------------------'*3)
+
+    # 응답 생성
+    response = model.generate_content(prompt)
+
+    return response
+
+
+# User-provided prompt
+if prompt := st.chat_input(): # (disabled=not replicate_api):
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.write(prompt)
+
+# Generate a new response if last message is not from assistant
+if st.session_state.messages[-1]["role"] != "assistant":
+    with st.chat_message("assistant"):
+        with st.spinner("Thinking..."):
+            # response = generate_llama2_response(prompt)
+            response = generate_response_with_faiss(prompt, df, embeddings, model, embed_text, time, local_choice)
+            placeholder = st.empty()
+            full_response = ''
+
+            # 만약 response가 GenerateContentResponse 객체라면, 문자열로 변환하여 사용합니다.
+            if isinstance(response, str):
+                full_response = response
+            else:
+                full_response = response.text  # response 객체에서 텍스트 부분 추출
+
+            # for item in response:
+            #     full_response += item
+            #     placeholder.markdown(full_response)
+
+            placeholder.markdown(full_response)
+    message = {"role": "assistant", "content": full_response}
+    st.session_state.messages.append(message)
