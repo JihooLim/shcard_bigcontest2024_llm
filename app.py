@@ -149,11 +149,8 @@ def embed_text(text):
 # FAISS + Gemini 응답 생성 함수
 def generate_response_with_priority(question, df, embeddings, model, embed_text, time, local_choice, index_path=os.path.join(module_path, 'faiss_index.index'), k=3):
     # 1. FAISS 인덱스를 통해 질문과 유사한 데이터를 검색
-    try:
         index = load_faiss_index(index_path)
-    except:
-        st.error(f"FAISS 인덱스를 찾을 수 없습니다: {e}")
-        return None
+
     
     query_embedding = embed_text(question).reshape(1, -1)
     distances, indices = index.search(query_embedding, k*3)
