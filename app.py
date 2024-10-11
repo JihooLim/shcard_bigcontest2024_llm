@@ -43,11 +43,11 @@ st.set_page_config(page_title="🍊참신한 제주 맛집!")
 
 # Replicate Credentials
 with st.sidebar:
-    st.title("🍊참신한! 제주 맛집")
+    st.title("식당이 even하게 익지 않았어요")
 
     st.write("")
 
-    st.subheader("언드레 가신디가?")
+    st.subheader("제가 보기엔 래스팅을 조금 더 하셨어도 됐고")
 
     # selectbox 레이블 공백 제거
     st.markdown(
