@@ -23,6 +23,10 @@ genai.configure(api_key=GOOGLE_API_KEY)
 # Gemini 모델 선택
 model = genai.GenerativeModel("gemini-1.5-flash")
 
+try:
+    model = genai.GenerativeModel("gemini-1.5-flash")
+except Exception as e:
+    st.error(f"Gemini 모델 로드 중 오류가 발생했습니다: {e}")
 
 # CSV 파일 로드
 ## 자체 전처리를 거친 데이터 파일 활용
@@ -126,62 +130,40 @@ st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 # 디바이스 설정
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-# Hugging Face의 사전 학습된 임베딩 모델과 토크나이저 로드
+# FAISS 설정
 model_name = "jhgan/ko-sroberta-multitask"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-embedding_model = AutoModel.from_pretrained(model_name).to(device)
-
-print(f'Device is {device}.')
-
+embedding_model = AutoModel.from_pretrained(model_name).to("cpu")
 
 # FAISS 인덱스 로드 함수
 def load_faiss_index(index_path=os.path.join(module_path, 'faiss_index.index')):
-    """
-    FAISS 인덱스를 파일에서 로드합니다.
-
-    Parameters:
-    index_path (str): 인덱스 파일 경로.
-
-    Returns:
-    faiss.Index: 로드된 FAISS 인덱스 객체.
-    """
     if os.path.exists(index_path):
-        # 인덱스 파일에서 로드
         index = faiss.read_index(index_path)
-        print(f"FAISS 인덱스가 {index_path}에서 로드되었습니다.")
         return index
     else:
         raise FileNotFoundError(f"{index_path} 파일이 존재하지 않습니다.")
 
-# 텍스트 임베딩
+# 텍스트 임베딩 함수
 def embed_text(text):
-    # 토크나이저의 출력도 GPU로 이동
-    inputs = tokenizer(text, return_tensors='pt', padding=True, truncation=True).to(device)
+    inputs = tokenizer(text, return_tensors='pt', padding=True, truncation=True).to("cpu")
     with torch.no_grad():
-        # 모델의 출력을 GPU에서 연산하고, 필요한 부분을 가져옴
         embeddings = embedding_model(**inputs).last_hidden_state.mean(dim=1)
-    return embeddings.squeeze().cpu().numpy()  # 결과를 CPU로 이동하고 numpy 배열로 변환
+    return embeddings.squeeze().cpu().numpy()
 
-# 임베딩 로드
-embeddings = np.load(os.path.join(module_path, 'embeddings_array_file.npy'))
-
-def generate_response_with_faiss(question, df, embeddings, model, embed_text, time, local_choice, index_path=os.path.join(module_path, 'faiss_index.index'), max_count=10, k=3, print_prompt=True):
-    filtered_df = df
-
-    # FAISS 인덱스를 파일에서 로드
-    index = load_faiss_index(index_path)
-
-    # 검색 쿼리 임베딩 생성
+# FAISS + Gemini 응답 생성 함수
+def generate_response_with_priority(question, df, embeddings, model, embed_text, time, local_choice, index_path=os.path.join(module_path, 'faiss_index.index'), k=3):
+    # 1. FAISS 인덱스를 통해 질문과 유사한 데이터를 검색
+    try:
+        index = load_faiss_index(index_path)
+    except FileNotFoundError as e:
+        st.error(f"FAISS 인덱스를 찾을 수 없습니다: {e}")
+        return None
+    
     query_embedding = embed_text(question).reshape(1, -1)
-
-    # 가장 유사한 텍스트 검색 (3배수)
     distances, indices = index.search(query_embedding, k*3)
-
-    # FAISS로 검색된 상위 k개의 데이터프레임 추출
-    filtered_df = filtered_df.iloc[indices[0, :]].copy().reset_index(drop=True)
-
-
-    # 웹페이지의 사이드바에서 선택하는 영업시간, 현지인 맛집 조건 구현
+    
+    # 검색된 상위 k개의 데이터 추출
+    filtered_df = df.iloc[indices[0, :]].copy().reset_index(drop=True)
 
     # 영업시간 옵션
     if time == '아침':
@@ -205,7 +187,19 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
         # Gemini 모델에 질문을 전달하고 답변 생성
         prompt = f"질문: {question} 특히 {local_choice}을 선호해"
         response = model.generate_content(prompt)
+        except Exception as e:
+            st.error(f"Gemini에서 답변을 생성하는 중 오류가 발생했습니다: {e}")
+            return None
         return response
+
+
+# 임베딩 로드 확인
+embeddings_path = os.path.join(module_path, 'embeddings_array_file.npy')
+if os.path.exists(embeddings_path):
+    embeddings = np.load(embeddings_path)
+else:
+    st.error(f"{embeddings_path} 파일을 찾을 수 없습니다.")
+    embeddings = None
 
 # 유저 질문 입력 처리
 if prompt := st.chat_input():
