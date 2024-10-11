@@ -35,15 +35,15 @@ df = df[df['기준연월'] == df['기준연월'].max()].reset_index(drop=True)
 
 # Streamlit App UI
 
-st.set_page_config(page_title="🍊참신한 제주 맛집!")
+st.set_page_config(page_title="🍊제주도가 그리 좋아!")
 
 # Replicate Credentials
 with st.sidebar:
-    st.title("🍊참신한! 제주 맛집")
+    st.title("🍊제주도가 그리 좋아!")
 
     st.write("")
 
-    st.subheader("언드레 가신디가?")
+    st.subheader("시간대가 어떻게 돼??")
 
     # selectbox 레이블 공백 제거
     st.markdown(
@@ -64,7 +64,7 @@ with st.sidebar:
 
     st.write("")
 
-    st.subheader("어드레가 맘에 드신디가?")
+    st.subheader("현지인 맛집? 관광객 맛집?")
 
     # radio 레이블 공백 제거
     st.markdown(
@@ -88,12 +88,12 @@ with st.sidebar:
 
     st.write("")
 
-st.title("혼저 옵서예!👋")
-st.subheader("군맛난 제주 밥집🧑‍🍳 추천해드릴게예")
+st.title("어서와용!👋")
+st.subheader("인기있는 제주 맛집🧑‍🍳 후회는 없을걸?!")
 
 st.write("")
 
-st.write("#흑돼지 #갈치조림 #옥돔구이 #고사리해장국 #전복뚝배기 #한치물회 #빙떡 #오메기떡..🤤")
+st.write("#흑돼지 #제철 생선회 #해물라면 #스테이크 #한식 #중식 #양식 #일식 #흑백요리사..🤤")
 
 st.write("")
 
@@ -197,7 +197,7 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
 
     # 필터링 후 가게가 없으면 메시지를 반환
     if filtered_df.empty:
-        return f"현재 선택하신 시간대({time})에는 영업하는 가게가 없습니다."
+        return f"현재 선택하신 시간대({time})에는 영업하는 가게가 없어요 ㅠㅠ."
 
     filtered_df = filtered_df.reset_index(drop=True).head(k)
 
@@ -212,7 +212,7 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
 
     # 선택된 결과가 없으면 처리
     if filtered_df.empty:
-        return "질문과 일치하는 가게가 없습니다."
+        return "질문과 일치하는 가게가 없어요 ㅠㅠ."
 
 
     # 참고할 정보와 프롬프트 구성
