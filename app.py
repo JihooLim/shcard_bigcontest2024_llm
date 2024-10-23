@@ -8,7 +8,7 @@ from tqdm import tqdm
 import faiss
 
 import streamlit as st
-
+#가나라
 # 경로 설정
 data_path = './data'
 module_path = './modules'
