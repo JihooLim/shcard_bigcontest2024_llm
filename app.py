@@ -63,7 +63,7 @@ with st.sidebar:
     time = st.sidebar.selectbox("", ["아침", "점심", "오후", "저녁", "밤"], key="time")
    
     with st.sidebar:
-        choice = time("", ["아침", "점심", "오후", "저녁", "밤"],
+        time = time("", ["아침", "점심", "오후", "저녁", "밤"],
                          icons=['morning', 'evening', 'afternoon','night','night'],
                          menu_icon="app-indicator", default_index=0,
                          styles={
