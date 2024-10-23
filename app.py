@@ -219,6 +219,17 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
 
     filtered_df = filtered_df.reset_index(drop=True).head(k)
 
+    # 프롬프트에 반영
+    if price == '최고가':
+        price = '최고급 분위기 있는 맛집'
+    elif price == '고가':
+        price = '고급 고가의 맛집'
+    elif price == '평균 가격대':
+        price = '부담없이 즐길 수 있는 비싸지 않은 맛집'
+    elif price == '중저가' :
+        price = '가성비 있는 중저가 맛집'
+    elif price == '저가' :
+        price = '저렴하게 즐길 수 있는 저가 맛집'
 
     # 선택된 결과가 없으면 처리
     if filtered_df.empty:
