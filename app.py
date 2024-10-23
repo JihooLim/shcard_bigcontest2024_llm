@@ -162,7 +162,7 @@ def embed_text(text):
 # 임베딩 로드
 embeddings = np.load(os.path.join(module_path, 'embeddings_array_file.npy'))
 
-def generate_response_with_faiss(question, df, embeddings, model, embed_text, time, local_choice, index_path=os.path.join(module_path, 'faiss_index.index'), max_count=10, k=3, print_prompt=True):
+def generate_response_with_faiss(question, df, embeddings, model, embed_text, time, local_choice, index_path=os.path.join(module_path, 'faiss_index.index'), max_count=10, k=6, print_prompt=True):
     filtered_df = df
 
     # FAISS 인덱스를 파일에서 로드
@@ -172,7 +172,7 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
     query_embedding = embed_text(question).reshape(1, -1)
 
     # 가장 유사한 텍스트 검색 (3배수)
-    distances, indices = index.search(query_embedding, k*6)
+    distances, indices = index.search(query_embedding, k*3)
 
     # FAISS로 검색된 상위 k개의 데이터프레임 추출
     filtered_df = filtered_df.iloc[indices[0, :]].copy().reset_index(drop=True)
