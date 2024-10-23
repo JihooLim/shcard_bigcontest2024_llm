@@ -199,7 +199,7 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
     if filtered_df.empty:
         return f"현재 선택하신 시간대({time})에는 영업하는 가게가 없습니다."
 
-    filtered_df = filtered_df.reset_index(drop=True).head(k)
+    filtered_df = filtered_df.reset_index(drop=True)
 
     # 희망 가격대 조건을 만족하는 가게들만 필터링
     if price == '최고가':
@@ -217,7 +217,8 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
     if filtered_df.empty:
         return f"현재 선택하신 시간대({time})에는 영업하는 가게가 없습니다."
 
-    filtered_df = filtered_df.reset_index(drop=True)
+    filtered_df = filtered_df.reset_index(drop=True).head(k)
+    
 
     # 선택된 결과가 없으면 처리
     if filtered_df.empty:
