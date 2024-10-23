@@ -35,11 +35,11 @@ df = df[df['기준연월'] == df['기준연월'].max()].reset_index(drop=True)
 
 # Streamlit App UI
 
-st.set_page_config(page_title="🍊제주도가 그리 좋아!")
+st.set_page_config(page_title="🍊제주도 맛집 추천")
 
 # Replicate Credentials
 with st.sidebar:
-    st.title("🍊제주도가 그리 좋아!")
+    st.title("🍊제주도 맛집 추천")
 
     st.write("")
 
