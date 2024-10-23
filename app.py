@@ -83,7 +83,6 @@ with st.sidebar:
 
     price = st.sidebar.selectbox("", ['최고가', '고가', '평균 가격대', '중저가', '저가'], key="price")
   
-    st.session_state.price = st.sidebar.selectbox("", ['최고가', '고가', '평균 가격대', '중저가', '저가'], key="price")
    
     st.write("")
 
