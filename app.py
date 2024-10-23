@@ -82,8 +82,6 @@ with st.sidebar:
     )
 
     price = st.sidebar.selectbox("", ['최고가', '고가', '평균 가격대', '중저가', '저가'], key="price")
-  
-    st.session_state.price = st.sidebar.selectbox("", ['최고가', '고가', '평균 가격대', '중저가', '저가'], key="price")
    
     st.write("")
 
@@ -219,7 +217,7 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
     if filtered_df.empty:
         return f"현재 선택하신 시간대({time})에는 영업하는 가게가 없습니다."
 
-    filtered_df = filtered_df.reset_index(drop=True).head(k)
+    filtered_df = filtered_df.reset_index(drop=True)
 
     # 프롬프트에 반영하여 활용
     if price == '최고가':
