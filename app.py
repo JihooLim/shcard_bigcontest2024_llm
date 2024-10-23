@@ -64,7 +64,7 @@ with st.sidebar:
 
     st.write("")
 
-    st.subheader("희망 가격대가 어떻게 돼??")
+    st.sidebar.subheader("희망 가격대가 어떻게 돼??")
 
     # radio 레이블 공백 제거
     st.markdown(
@@ -82,7 +82,9 @@ with st.sidebar:
     )
 
     price = st.sidebar.selectbox("", ['최고가', '고가', '평균 가격대', '중저가', '저가'], key="price")
-
+  
+    st.session_state.price = st.sidebar.selectbox("", ['최고가', '고가', '평균 가격대', '중저가', '저가'], key="price")
+   
     st.write("")
 
 st.title("어서 와용!👋")
@@ -266,7 +268,7 @@ if st.session_state.messages[-1]["role"] != "assistant":
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
             # response = generate_llama2_response(prompt)
-            response = generate_response_with_faiss(prompt, df, embeddings, model, embed_text, time, price)
+            response = generate_response_with_faiss(prompt, df, embeddings, model, embed_text, time, st.session_state.price)
             placeholder = st.empty()
             full_response = ''
 
