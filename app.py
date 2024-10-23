@@ -231,7 +231,7 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
         reference_info += f"{row['text']}\n"
 
     # 응답을 받아오기 위한 프롬프트 생성
-    prompt = f"질문: {question} 특히 {local_choice}을 선호해\n참고할 정보:\n{reference_info}\n응답:"
+    prompt = f"질문: {question} 특히 {price}을 선호해\n참고할 정보:\n{reference_info}\n응답:"
 
     if print_prompt:
         print('-----------------------------'*3)
