@@ -61,6 +61,18 @@ with st.sidebar:
     )
 
     time = st.sidebar.selectbox("", ["아침", "점심", "오후", "저녁", "밤"], key="time")
+   
+    with st.sidebar:
+        choice = time("", ["아침", "점심", "오후", "저녁", "밤"],
+                         icons=['morning', 'evening', 'afternoon','night','night'],
+                         menu_icon="app-indicator", default_index=0,
+                         styles={
+        "container": {"padding": "4!important", "background-color": "#fafafa"},
+        "icon": {"color": "black", "font-size": "25px"},
+        "nav-link": {"font-size": "16px", "text-align": "left", "margin":"0px", "--hover-color": "#f28900"},
+        "nav-link-selected": {"background-color": "#08c7b4"},
+    }
+    )
 
     st.write("")
 
@@ -162,7 +174,7 @@ def embed_text(text):
 # 임베딩 로드
 embeddings = np.load(os.path.join(module_path, 'embeddings_array_file.npy'))
 
-def generate_response_with_faiss(question, df, embeddings, model, embed_text, time, local_choice, index_path=os.path.join(module_path, 'faiss_index.index'), max_count=10, k=6, print_prompt=True):
+def generate_response_with_faiss(question, df, embeddings, model, embed_text, time, local_choice, index_path=os.path.join(module_path, 'faiss_index.index'), max_count=10, k=10, print_prompt=True):
     filtered_df = df
 
     # FAISS 인덱스를 파일에서 로드
