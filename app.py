@@ -203,15 +203,15 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
 
     # 희망 가격대 조건을 만족하는 가게들만 필터링
     if price == '최고가':
-        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('1')].reset_index(drop=True)
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('6')].reset_index(drop=True)
     elif price == '고가':
-        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('2')].reset_index(drop=True)
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('5'or'4')].reset_index(drop=True)
     elif price == '평균 가격대':
         filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('3')].reset_index(drop=True)
     elif price == '중저가':
-        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('4')].reset_index(drop=True)
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('2')].reset_index(drop=True)
     elif price == '저가':
-        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('5' or '6')].reset_index(drop=True)
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('1')].reset_index(drop=True)
  
     # 필터링 후 가게가 없으면 반환
     if filtered_df.empty:
