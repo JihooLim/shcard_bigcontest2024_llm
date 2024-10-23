@@ -172,7 +172,7 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
     query_embedding = embed_text(question).reshape(1, -1)
 
     # 가장 유사한 텍스트 검색 (3배수)
-    distances, indices = index.search(query_embedding, k*3)
+    distances, indices = index.search(query_embedding, k*6)
 
     # FAISS로 검색된 상위 k개의 데이터프레임 추출
     filtered_df = filtered_df.iloc[indices[0, :]].copy().reset_index(drop=True)
