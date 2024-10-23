@@ -88,7 +88,7 @@ with st.sidebar:
 
     st.write("")
 
-st.title("어서와용!👋")
+st.title("어서 와용!👋")
 st.subheader("인기있는 제주 맛집🧑‍🍳 후회는 없을걸?!")
 
 st.write("")
@@ -109,7 +109,7 @@ st.write("")
 
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():
-    st.session_state.messages = [{"role": "assistant", "content": "어드런 식당 찾으시쿠과?"}]
+    st.session_state.messages = [{"role": "assistant", "content": "어떤 식당 찾고 있나요?"}]
 
 # Display or clear chat messages
 for message in st.session_state.messages:
@@ -117,7 +117,7 @@ for message in st.session_state.messages:
         st.write(message["content"])
 
 def clear_chat_history():
-    st.session_state.messages = [{"role": "assistant", "content": "어드런 식당 찾으시쿠과?"}]
+    st.session_state.messages = [{"role": "assistant", "content": "어떤 식당 찾고 있나요?"}]
 st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
 
 
