@@ -43,7 +43,7 @@ with st.sidebar:
 
     st.write("")
 
-    st.subheader("시간대가 어떻게 돼??")
+    st.subheader("시간대가 어떻게 되시나요??")
 
     # selectbox 레이블 공백 제거
     st.markdown(
@@ -64,27 +64,24 @@ with st.sidebar:
 
     st.write("")
 
-    st.subheader("현지인 맛집? 관광객 맛집?")
+    st.subheader("희망 가격대가 어떻게 돼??")
 
     # radio 레이블 공백 제거
     st.markdown(
         """
         <style>
-        .stRadio > label {
-            display: none;
+        .stSelectbox label {  /* This targets the label element for selectbox */
+            display: none;  /* Hides the label element */
         }
-        .stRadio > div {
-            margin-top: -20px;
+        .stSelectbox div[role='combobox'] {
+            margin-top: -20px; /* Adjusts the margin if needed */
         }
         </style>
         """,
         unsafe_allow_html=True
     )
 
-    local_choice = st.radio(
-        '',
-        ('제주도민 맛집', '관광객 맛집')
-    )
+    price = st.sidebar.selectbox("", ['최고가', '고가', '평균 가격대', '중저가', '저가'], key="price")
 
     st.write("")
 
@@ -204,14 +201,35 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
 
     filtered_df = filtered_df.reset_index(drop=True).head(k)
 
+    # 희망 가격대 조건을 만족하는 가게들만 필터링
+    if price == '최고가':
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].apply(lambda x : x.str.startswith('1'))].reset_index(drop=True)
+    elif price == '고가':
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].apply(lambda x : x.str.startswith('2'))].reset_index(drop=True)
+    elif price == '평균 가격대':
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].apply(lambda x : x.str.startswith('3'))].reset_index(drop=True)
+    elif price == '중저가':
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].apply(lambda x : x.str.startswith('4'))].reset_index(drop=True)  
+    elif price == '저가':
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].apply(lambda x : x.str.startswith('5'))].reset_index(drop=True)
+ 
+    # 필터링 후 가게가 없으면 반환
+    if filtered_df.empty:
+        return f"현재 선택하신 시간대({time})에는 영업하는 가게가 없습니다."
 
-    # 현지인 맛집 옵션
+    filtered_df = filtered_df.reset_index(drop=True).head(k)
 
     # 프롬프트에 반영하여 활용
-    if local_choice == '제주도민 맛집':
-        local_choice = '제주도민(현지인) 맛집'
-    elif local_choice == '관광객 맛집':
-        local_choice = '현지인 비중이 낮은 관광객 맛집'
+    if price == '최고가':
+        price = '하이엔드 고급 음식점'
+    elif price == '고가':
+        price = '가성비 고급 음식점'
+    elif price == '평균 가격대':
+        price = '부담없이 즐길 수 있는 음식점'
+    elif price == '중저가' :
+        price = '가성비 중저가 맛집'
+    elif price == '저가' :
+        price = '최저가 맛집'
 
     # 선택된 결과가 없으면 처리
     if filtered_df.empty:
@@ -248,7 +266,7 @@ if st.session_state.messages[-1]["role"] != "assistant":
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
             # response = generate_llama2_response(prompt)
-            response = generate_response_with_faiss(prompt, df, embeddings, model, embed_text, time, local_choice)
+            response = generate_response_with_faiss(prompt, df, embeddings, model, embed_text, time, price)
             placeholder = st.empty()
             full_response = ''
 
