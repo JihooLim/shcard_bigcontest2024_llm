@@ -16,9 +16,10 @@ module_path = './modules'
 # Gemini 설정
 import google.generativeai as genai
 
-GOOGLE_API_KEY = st.secrets["API_KEY"]
+# GOOGLE_API_KEY = st.secrets["API_KEY"]
 
-genai.configure(api_key=GOOGLE_API_KEY)
+
+genai.configure(api_key="AIzaSyBx1J1pS9k7bNA7R-5fkgAK8K7xQxd7Fes")
 
 # Gemini 모델 선택
 model = genai.GenerativeModel("gemini-1.5-flash")
