@@ -61,18 +61,6 @@ with st.sidebar:
     )
 
     time = st.sidebar.selectbox("", ["아침", "점심", "오후", "저녁", "밤"], key="time")
-   
-    with st.sidebar:
-        time = time("", ["아침", "점심", "오후", "저녁", "밤"],
-                         icons=['morning', 'evening', 'afternoon','night','night'],
-                         menu_icon="app-indicator", default_index=0,
-                         styles={
-        "container": {"padding": "4!important", "background-color": "#fafafa"},
-        "icon": {"color": "black", "font-size": "25px"},
-        "nav-link": {"font-size": "16px", "text-align": "left", "margin":"0px", "--hover-color": "#f28900"},
-        "nav-link-selected": {"background-color": "#08c7b4"},
-    }
-    )
 
     st.write("")
 
