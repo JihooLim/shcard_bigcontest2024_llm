@@ -103,21 +103,6 @@ image_html = f"""
 """
 st.markdown(image_html, unsafe_allow_html=True)
 
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-color: #0066e3;  /* 바다 느낌의 배경색 */
-        color: #333333;  /* 텍스트 색상 */
-    }
-    .sidebar .sidebar-content {
-        background-color: #FFA500;  /* 귤을 상징하는 주황색 */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 st.write("")
 
 # Store LLM generated responses
