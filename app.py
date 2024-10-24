@@ -89,7 +89,7 @@ with st.sidebar:
         """
          <style>
          [data-testid=stSidebar] {
-         background-color: #ff000050;
+         background-color: #ff0000;
          }
         </style>
         """, unsafe_allow_html=True)
