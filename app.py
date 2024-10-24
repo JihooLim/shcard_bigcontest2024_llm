@@ -41,7 +41,7 @@ st.set_page_config(page_title="🍊제주도 맛집 추천")
 
 # Replicate Credentials
 with st.sidebar:
-    st.title("🍊제주도 맛집 추천")
+    st.title("**🍊제주도 맛집 추천**")
 
     st.write("")
 
@@ -85,11 +85,11 @@ with st.sidebar:
 
     price = st.sidebar.selectbox("", ['상관 없음','최고가', '고가', '평균 가격대', '중저가', '저가'], key="price")
     
+
     st.markdown(
         """
          <style>
          [data-testid="stSidebar"] {
-
          background-color: #ffa500;
          }
         </style>
