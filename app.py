@@ -37,20 +37,6 @@ df = df[df['기준연월'] == df['기준연월'].max()].reset_index(drop=True)
 
 st.set_page_config(page_title="🍊제주도 맛집 추천")
 
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-color: #ADD8E6;  /* 바다 느낌의 배경색 */
-        color: #333333;  /* 텍스트 색상 */
-    }
-    .sidebar .sidebar-content {
-        background-color: #FFA500;  /* 귤을 상징하는 주황색 */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 # Replicate Credentials
 with st.sidebar:
@@ -116,6 +102,21 @@ image_html = f"""
 </div>
 """
 st.markdown(image_html, unsafe_allow_html=True)
+
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-color: #ADD8E6;  /* 바다 느낌의 배경색 */
+        color: #333333;  /* 텍스트 색상 */
+    }
+    .sidebar .sidebar-content {
+        background-color: #FFA500;  /* 귤을 상징하는 주황색 */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 st.write("")
 
