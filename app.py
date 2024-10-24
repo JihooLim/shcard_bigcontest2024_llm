@@ -56,7 +56,7 @@ with st.sidebar:
             margin-top: -20px; /* Adjusts the margin if needed */
         }
         </style>
-        ""","nav-link-selected": {"background-color": "#e06e10"},,
+        ""","nav-link-selected": {"background-color": "#e06e10"},
         unsafe_allow_html=True
     )
 
