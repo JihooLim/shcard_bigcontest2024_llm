@@ -89,6 +89,9 @@ with st.sidebar:
     st.markdown(
         """
          <style>
+          .white-text {
+            color: white;
+         },
          [data-testid="stSidebar"] {
          background-color: #ffa500;
          }
