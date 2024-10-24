@@ -53,7 +53,7 @@ with st.sidebar:
      </style>
      """, unsafe_allow_html=True)
 
-    st.sidebar.markdown('<p class="sidebar-text">**시간대가 어떻게 되시나요??**</p>', unsafe_allow_html=True)
+    st.sidebar.markdown('<p class="sidebar-text">시간대가 어떻게 되시나요??</p>', unsafe_allow_html=True)
 
     # selectbox 레이블 공백 제거
     st.markdown(
