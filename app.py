@@ -54,7 +54,7 @@ with st.sidebar:
      </style>
      """, unsafe_allow_html=True)
 
-    st.sidebar.markdown('<p class="sidebar-text">시간대가 어떻게 되시나요??</p>', unsafe_allow_html=True)
+    st.sidebar.markdown('<p class="sidebar-text">🕛시간대가 어떻게 되시나요??</p>', unsafe_allow_html=True)
 
     # selectbox 레이블 공백 제거
     st.markdown(
@@ -75,7 +75,7 @@ with st.sidebar:
 
     st.write("")
 
-    st.sidebar.markdown('<p class="sidebar-text">희망 가격대는 어떻게 되시나요??</p>', unsafe_allow_html=True)
+    st.sidebar.markdown('<p class="sidebar-text">💵희망 가격대는 어떻게 되시나요??</p>', unsafe_allow_html=True)
 
     # radio 레이블 공백 제거
     st.markdown(
@@ -106,7 +106,7 @@ with st.sidebar:
     st.write("")
 
 st.title("어서 와용!👋")
-st.subheader("인기있는 :orange[제주 맛집]🧑 후회는 없을걸?!")
+st.subheader("인기있는 :orange[제주 맛집]🍽️ 후회는 없을걸?!")
 
 st.write("")
 
