@@ -103,6 +103,19 @@ image_html = f"""
 """
 st.markdown(image_html, unsafe_allow_html=True)
 
+st.markdown(
+    """
+    <style>
+    .reportview-container {
+        background: url('https://example.com/jeju_background.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.write("")
 
 # Store LLM generated responses
