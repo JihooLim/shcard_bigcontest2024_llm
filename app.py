@@ -47,7 +47,7 @@ with st.sidebar:
     st.markdown("""
         <style>
         .sidebar-text {
-        color: #FFFFFF;
+        color: #FFEC9D;
         font-size: 18px;
         font-weight: bold;
         }
@@ -98,7 +98,7 @@ with st.sidebar:
         """
          <style>
          [data-testid="stSidebar"] {
-         background-color: #FFEC9D;
+         background-color: #ff9900;
          }
         </style>
         """, unsafe_allow_html=True)
@@ -116,7 +116,7 @@ st.write("")
 image_path = "https://pimg.mk.co.kr/news/cms/202409/22/news-p.v1.20240922.a626061476c54127bbe4beb0aa12d050_P1.png"
 image_html = f"""
 <div style="display: flex; justify-content: center;">
-    <img src="{image_path}" alt="centered image" width="70%">
+    <img src="{image_path}" alt="centered image" width="0%">
 </div>
 """
 st.markdown(image_html, unsafe_allow_html=True)
