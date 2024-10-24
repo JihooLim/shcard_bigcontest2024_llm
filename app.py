@@ -135,7 +135,7 @@ for message in st.session_state.messages:
 
 def clear_chat_history():
     st.session_state.messages = [{"role": "assistant", "content": "어떤 식당 찾고 있나요?"}]
-st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
+st.sidebar.button('대화 초기화 🔄', on_click=clear_chat_history)
 
 
 # RAG
