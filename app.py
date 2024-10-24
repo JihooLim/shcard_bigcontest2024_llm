@@ -71,7 +71,7 @@ with st.sidebar:
         unsafe_allow_html=True
     )
 
-    time = st.sidebar.selectbox("", ["👌상관 없음","☀️아침", "🌞점심", "🕒오후", "🌙저녁", "⭐밤"], key="time")
+    time = st.sidebar.selectbox("", ["👌 상관 없음","☀️ 아침", "🌞 점심", "🕒 오후", "🌙 저녁", "⭐ 밤"], key="time")
 
     st.write("")
 
@@ -92,7 +92,7 @@ with st.sidebar:
         unsafe_allow_html=True
     )
 
-    price = st.sidebar.selectbox("", ['상관 없음','최고가', '고가', '평균 가격대', '중저가', '저가'], key="price")
+    price = st.sidebar.selectbox("", ['👌 상관 없음','😎 최고가', '💸 고가', '💰 평균 가격대', '💵 중저가', '😂 저가'], key="price")
     
 
     st.markdown(
