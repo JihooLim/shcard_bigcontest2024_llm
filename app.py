@@ -44,8 +44,16 @@ with st.sidebar:
     st.title("**🍊제주도 맛집 추천**")
 
     st.write("")
+    st.markdown("""
+        <style>
+        .sidebar-text {
+        color: white;
+        font-size: 18px;
+        }
+     </style>
+     """, unsafe_allow_html=True)
 
-    st.subheader(":violet[시간대가 어떻게 되시나요??]")
+    st.subheader.markdown("<p class="sidebar-text">시간대가 어떻게 되시나요??</p>", unsafe_allow_html=True)
 
     # selectbox 레이블 공백 제거
     st.markdown(
@@ -89,9 +97,6 @@ with st.sidebar:
     st.markdown(
         """
          <style>
-          .white-text {
-            color: white;
-         },
          [data-testid="stSidebar"] {
          background-color: #ffa500;
          }
