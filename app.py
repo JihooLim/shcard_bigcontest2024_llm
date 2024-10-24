@@ -66,7 +66,7 @@ with st.sidebar:
 
     st.write("")
 
-    st.sidebar.subheader(":red[희망 가격대가 어떻게 돼??]")
+    st.sidebar.subheader(":yellow[희망 가격대가 어떻게 돼??]")
 
     # radio 레이블 공백 제거
     st.markdown(
