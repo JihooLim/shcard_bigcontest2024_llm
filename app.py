@@ -106,15 +106,22 @@ st.markdown(image_html, unsafe_allow_html=True)
 st.markdown(
     """
     <style>
-    .reportview-container {
-        background: url('https://example.com/jeju_background.jpg');
-        background-size: cover;
-        background-repeat: no-repeat;
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        margin: 10px;
+        box-shadow: 2px 2px 12px #aaa;
+        background-color: #fff;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
+
+# 카드 요소 예시
+st.markdown('<div class="card">맛집 정보</div>', unsafe_allow_html=True)
+
 
 st.write("")
 
