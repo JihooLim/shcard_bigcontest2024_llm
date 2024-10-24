@@ -49,6 +49,7 @@ with st.sidebar:
         .sidebar-text {
         color: #ff675B;
         font-size: 20px;
+        font-weight: bold;
         }
      </style>
      """, unsafe_allow_html=True)
@@ -74,7 +75,7 @@ with st.sidebar:
 
     st.write("")
 
-    st.sidebar.subheader(":violet[희망 가격대가 어떻게 돼??]")
+    st.sidebar.subheader('<p class="sidebar-text">희망 가격대가 어떻게 돼??</p>', unsafe_allow_html=True)
 
     # radio 레이블 공백 제거
     st.markdown(
