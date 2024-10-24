@@ -71,7 +71,7 @@ with st.sidebar:
         unsafe_allow_html=True
     )
 
-    time = st.sidebar.selectbox("", ["**👌 상관 없음**","☀️ 아침", "🌞 점심", "🕒 오후", "🌙 저녁", "⭐ 밤"], key="time")
+    time = st.sidebar.selectbox("", ["👌 상관 없음","☀️ 아침", "🌞 점심", "🕒 오후", "🌙 저녁", "⭐ 밤"], key="time")
 
     st.write("")
 
@@ -94,7 +94,6 @@ with st.sidebar:
 
     price = st.sidebar.selectbox("", ['👌 상관 없음','😎 최고가', '💸 고가', '💰 평균 가격대', '💵 중저가', '😂 저가'], key="price")
     
-
     st.markdown(
         """
          <style>
@@ -106,7 +105,7 @@ with st.sidebar:
     st.write("")
 
 st.title("어서 와용!👋")
-st.subheader("인기있는 :orange[제주 맛집]🍽️😍 후회는 없을걸?!")
+st.subheader("인기 있는 :orange[제주 맛집]🍽️😍 후회는 없을걸?!")
 
 st.write("")
 
