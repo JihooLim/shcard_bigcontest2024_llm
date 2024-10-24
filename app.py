@@ -86,7 +86,7 @@ with st.sidebar:
     st.write("")
 
 st.title("어서 와용!👋")
-st.subheader(st.markdown("인기있는 :orange[제주 맛집]🧑‍🍳 후회는 없을걸?!"))
+st.subheader("인기있는 :orange[제주 맛집]🧑‍🍳 후회는 없을걸?!")
 
 st.write("")
 
