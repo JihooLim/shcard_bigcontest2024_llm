@@ -84,7 +84,15 @@ with st.sidebar:
     )
 
     price = st.sidebar.selectbox("", ['상관 없음','최고가', '고가', '평균 가격대', '중저가', '저가'], key="price")
-   
+    
+    st.markdown(
+        """
+         <style>
+         [data-testid=stSidebar] {
+         background-color: #ff000050;
+         }
+        </style>
+        """, unsafe_allow_html=True)
     st.write("")
 
 st.title("어서 와용!👋")
@@ -103,31 +111,7 @@ image_html = f"""
 </div>
 """
 st.markdown(image_html, unsafe_allow_html=True)
-st.markdown(
-    """
-    <style>
-    .reportview-container {
-        background: url('https://gongu.copyright.or.kr/gongu/wrt/cmmn/wrtFileImageView.do?wrtSn=13049247&filePath=L2Rpc2sxL25ld2RhdGEvMjAxNy8yMS9DTFM0L1dSVF9UUkVBU1VSRV9IVU5UXzIwMTcwOTExXzM4NQ==&thumbAt=Y&thumbSe=b_tbumb&wrtTy=10004');
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-    .title {
-        color: #2C3E50;
-        font-family: 'Noto Sans', sans-serif;
-        text-align: center;
-    }
-    .card {
-        border: 2px solid #2980B9;
-        border-radius: 10px;
-        padding: 20px;
-        margin: 10px;
-        box-shadow: 2px 2px 12px #aaa;
-        background-color: #ffffff;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+
 st.write("")
 
 # Store LLM generated responses
