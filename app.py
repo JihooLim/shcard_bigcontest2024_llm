@@ -47,8 +47,8 @@ with st.sidebar:
     st.markdown("""
         <style>
         .sidebar-text {
-        color: white;
-        font-size: 18px;
+        color: #ff675B;
+        font-size: 20px;
         }
      </style>
      """, unsafe_allow_html=True)
