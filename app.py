@@ -61,7 +61,7 @@ with st.sidebar:
     )
 
     time = st.sidebar.selectbox("", ["상관 없음","아침", "점심", "오후", "저녁", "밤"],
-                                styles = {"nav-link-selected": {"background-color": "#e06e10"}} key="time")
+                                styles = {"nav-link-selected": {"background-color": "#e06e10"}}, key="time")
 
     st.write("")
 
