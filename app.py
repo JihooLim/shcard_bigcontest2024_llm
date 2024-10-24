@@ -107,7 +107,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-color: #ADD8E6;  /* 바다 느낌의 배경색 */
+        background-color: #30f0f0;  /* 바다 느낌의 배경색 */
         color: #333333;  /* 텍스트 색상 */
     }
     .sidebar .sidebar-content {
