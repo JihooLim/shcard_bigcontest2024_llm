@@ -45,7 +45,7 @@ with st.sidebar:
 
     st.write("")
 
-    st.subheader("시간대가 어떻게 되시나요??")
+    st.subheader(":white[시간대가 어떻게 되시나요??]")
 
     # selectbox 레이블 공백 제거
     st.markdown(
@@ -62,11 +62,11 @@ with st.sidebar:
         unsafe_allow_html=True
     )
 
-    time = st.sidebar.selectbox("", :white[["상관 없음","아침", "점심", "오후", "저녁", "밤"]], key="time")
+    time = st.sidebar.selectbox("", ["상관 없음","아침", "점심", "오후", "저녁", "밤"], key="time")
 
     st.write("")
 
-    st.sidebar.subheader("희망 가격대가 어떻게 돼??")
+    st.sidebar.subheader(":white[희망 가격대가 어떻게 돼??]")
 
     # radio 레이블 공백 제거
     st.markdown(
