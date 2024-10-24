@@ -27,7 +27,7 @@ model = genai.GenerativeModel("gemini-1.5-flash")
 # CSV 파일 로드
 ## 자체 전처리를 거친 데이터 파일 활용
 csv_file_path = "JEJU_DATA.csv"
-df = pd.read_csv(os.path.join(data_path, csv_file_path0),encoding = 'cp949')
+df = pd.read_csv(os.path.join(data_path, csv_file_path),encoding = 'cp949')
 
 # 최신연월 데이터만 가져옴
 df = df[df['기준연월'] == df['기준연월'].max()].reset_index(drop=True)
