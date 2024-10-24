@@ -45,7 +45,7 @@ with st.sidebar:
 
     st.write("")
 
-    st.subheader(":blue[시간대가 어떻게 되시나요??]")
+    st.subheader(":violet[시간대가 어떻게 되시나요??]")
 
     # selectbox 레이블 공백 제거
     st.markdown(
@@ -66,7 +66,7 @@ with st.sidebar:
 
     st.write("")
 
-    st.sidebar.subheader(":blue[희망 가격대가 어떻게 돼??]")
+    st.sidebar.subheader(":violet[희망 가격대가 어떻게 돼??]")
 
     # radio 레이블 공백 제거
     st.markdown(
