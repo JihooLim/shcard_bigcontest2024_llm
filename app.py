@@ -47,7 +47,7 @@ with st.sidebar:
     st.markdown("""
         <style>
         .sidebar-text {
-        color: #009745;
+        color: #B271FF;
         font-size: 20px;
         font-weight: bold;
         }
