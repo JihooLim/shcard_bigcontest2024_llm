@@ -56,7 +56,7 @@ with st.sidebar:
             margin-top: -20px; /* Adjusts the margin if needed */
         }
         </style>
-        """,
+        ""","nav-link-selected": {"background-color": "#e06e10"},,
         unsafe_allow_html=True
     )
 
@@ -86,7 +86,7 @@ with st.sidebar:
     st.write("")
 
 st.title("어서 와용!👋")
-st.subheader("인기있는 :orange[제주 맛집]🧑‍🍳 후회는 없을걸?!")
+st.subheader("인기있는 :orange[제주 맛집]🧑 후회는 없을걸?!")
 
 st.write("")
 
