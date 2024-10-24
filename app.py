@@ -45,7 +45,7 @@ with st.sidebar:
 
     st.write("")
 
-    st.subheader(":white[시간대가 어떻게 되시나요??]")
+    st.subheader("시간대가 어떻게 되시나요??")
 
     # selectbox 레이블 공백 제거
     st.markdown(
@@ -85,6 +85,16 @@ with st.sidebar:
 
     price = st.sidebar.selectbox("", ['상관 없음','최고가', '고가', '평균 가격대', '중저가', '저가'], key="price")
     
+    st.html(
+    """
+    <style>
+    [data-testid="stSidebarContent"] {
+    color: white;
+    background-color: #ffa500;
+    }
+    </style>
+    """
+    )
     st.markdown(
         """
          <style>
