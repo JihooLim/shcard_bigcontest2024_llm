@@ -60,7 +60,7 @@ with st.sidebar:
         unsafe_allow_html=True
     )
 
-    time = st.sidebar.selectbox("", ["아침", "점심", "오후", "저녁", "밤"], key="time")
+    time = st.sidebar.selectbox("", ["상관 없음","아침", "점심", "오후", "저녁", "밤"], key="time")
 
     st.write("")
 
@@ -81,7 +81,7 @@ with st.sidebar:
         unsafe_allow_html=True
     )
 
-    price = st.sidebar.selectbox("", ['최고가', '고가', '평균 가격대', '중저가', '저가'], key="price")
+    price = st.sidebar.selectbox("", ['상관 없음','최고가', '고가', '평균 가격대', '중저가', '저가'], key="price")
    
     st.write("")
 
@@ -184,7 +184,9 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
     # 필터링 조건으로 활용
 
     # 영업시간 조건을 만족하는 가게들만 필터링
-    if time == '아침':
+    if time == '상관 없음':
+        filtered_df = filtered_df
+    elif time == '아침':
         filtered_df = filtered_df[filtered_df['영업시간'].apply(lambda x: isinstance(eval(x), list) and any(hour in eval(x) for hour in range(5, 12)))].reset_index(drop=True)
     elif time == '점심':
         filtered_df = filtered_df[filtered_df['영업시간'].apply(lambda x: isinstance(eval(x), list) and any(hour in eval(x) for hour in range(12, 14)))].reset_index(drop=True)
@@ -202,7 +204,9 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
     filtered_df = filtered_df.reset_index(drop=True)
 
     # 희망 가격대 조건을 만족하는 가게들만 필터링
-    if price == '최고가':
+    if price == '상관 없음':
+        filtered_df = filtered_df
+    elif price == '최고가':
         filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('6')].reset_index(drop=True)
     elif price == '고가':
         filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('5'or'4')].reset_index(drop=True)
