@@ -56,11 +56,11 @@ with st.sidebar:
             margin-top: -20px; /* Adjusts the margin if needed */
         }
         </style>
-        ""","nav-link-selected": {"background-color": "#e06e10"},
+        """,
         unsafe_allow_html=True
     )
 
-    time = st.sidebar.selectbox("", ["상관 없음","아침", "점심", "오후", "저녁", "밤"], key="time")
+    time = st.sidebar.selectbox("", ["상관 없음","아침", "점심", "오후", "저녁", "밤"],"nav-link-selected": {"background-color": "#e06e10"},key="time")
 
     st.write("")
 
