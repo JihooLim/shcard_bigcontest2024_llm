@@ -37,6 +37,31 @@ df = df[df['기준연월'] == df['기준연월'].max()].reset_index(drop=True)
 
 st.set_page_config(page_title="🍊제주도 맛집 추천")
 
+st.markdown(
+    """
+    <style>
+    .reportview-container {
+        background: url('https://gongu.copyright.or.kr/gongu/wrt/cmmn/wrtFileImageView.do?wrtSn=13049247&filePath=L2Rpc2sxL25ld2RhdGEvMjAxNy8yMS9DTFM0L1dSVF9UUkVBU1VSRV9IVU5UXzIwMTcwOTExXzM4NQ==&thumbAt=Y&thumbSe=b_tbumb&wrtTy=10004');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .title {
+        color: #2C3E50;
+        font-family: 'Noto Sans', sans-serif;
+        text-align: center;
+    }
+    .card {
+        border: 2px solid #2980B9;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px;
+        box-shadow: 2px 2px 12px #aaa;
+        background-color: #ffffff;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Replicate Credentials
 with st.sidebar:
