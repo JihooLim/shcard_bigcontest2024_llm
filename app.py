@@ -26,7 +26,7 @@ model = genai.GenerativeModel("gemini-1.5-flash")
 
 # CSV 파일 로드
 ## 자체 전처리를 거친 데이터 파일 활용
-csv_file_path = "JEJU_DATA.csv"
+csv_file_path = "JEJU_MCT_DATA_modified.csv"
 df = pd.read_csv(os.path.join(data_path, csv_file_path))
 
 # 최신연월 데이터만 가져옴
