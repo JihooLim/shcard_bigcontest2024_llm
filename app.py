@@ -254,7 +254,10 @@ def generate_response_with_faiss(question, df, embeddings, model, embed_text, ti
         reference_info += f"{row['text']}\n"
 
     # 응답을 받아오기 위한 프롬프트 생성
-    prompt = f"질문: {question} 특히 {price}을 선호해\n참고할 정보:\n{reference_info}\n응답:"
+    prompt = f"질문: {question} 특히 {price}을 선호해 대답해줄때 업종별로 가능하면 하나씩 추천해줘. 
+    그리고 추가적으로 그 중에서 가맹점개점일자가 오래되고 이용건수가 많은 음식점(오래된맛집)과 가맹점개점일자가 최근이고
+    이용건수가 많은 음식점(새로운맛집)을 각각 추천해줬으면 좋겠어.
+    \n참고할 정보:\n{reference_info}\n응답:"
 
     if print_prompt:
         print('-----------------------------'*3)
