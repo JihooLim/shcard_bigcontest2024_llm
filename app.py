@@ -89,7 +89,7 @@ with st.sidebar:
         """
          <style>
          [data-testid="stSidebar"] {
-         color: white;
+         
          background-color: #ffa500;
          }
         </style>
