@@ -85,19 +85,11 @@ with st.sidebar:
 
     price = st.sidebar.selectbox("", ['상관 없음','최고가', '고가', '평균 가격대', '중저가', '저가'], key="price")
     
-    st.html(
-    """
-    <style>
-    [data-testid="stSidebarContent"] {
-    color: white;
-    background-color: #ffa500;
-    }
-    </style>
-    """
-    )
     st.markdown(
         """
          <style>
+         [data-testid="stSidebarContent"] {
+         color: white;
          [data-testid=stSidebar] {
          background-color: #ffa500;
          }
