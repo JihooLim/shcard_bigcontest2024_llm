@@ -169,9 +169,6 @@ def generate_response_with_faiss(question, df, embeddings, model, df_tour, embed
     elif price == '저가':
         filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('1')].reset_index(drop=True)
  
-    # 필터링 후 가게가 없으면 반환
-    if filtered_df.empty:
-        return f"현재 선택하신 시간대({time})에는 영업하는 가게가 없습니다."
 
     filtered_df = filtered_df.reset_index(drop=True).head(k)
     
