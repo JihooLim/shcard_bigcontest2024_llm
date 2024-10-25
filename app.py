@@ -145,15 +145,15 @@ def generate_response_with_faiss(question, df, embeddings, model, df_tour, embed
     if price == '상관 없음':
         filtered_df = filtered_df
     elif price == '최고가':
-        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('6')].reset_index(drop=True)
-    elif price == '고가':
-        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('5'or'4')].reset_index(drop=True)
-    elif price == '평균 가격대':
-        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('3')].reset_index(drop=True)
-    elif price == '중저가':
-        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('2')].reset_index(drop=True)
-    elif price == '저가':
         filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('1')].reset_index(drop=True)
+    elif price == '고가':
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('2')].reset_index(drop=True)
+    elif price == '평균 가격대':
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('3'or '4')].reset_index(drop=True)
+    elif price == '중저가':
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('5')].reset_index(drop=True)
+    elif price == '저가':
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('6')].reset_index(drop=True)
  
 
     filtered_df = filtered_df.reset_index(drop=True).head(k)
