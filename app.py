@@ -98,7 +98,7 @@ st.write("")
 
 # 대화 상태 초기화
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": "어드런 식당 찾으시쿠과?"}]
+    st.session_state.messages = [{"role": "assistant", "content": "어떤 식당 찾으시나요?? 위치, 업종 등을 알려주시면 최고의 맛집 추천해드릴게요!"}]
 
 # 메시지 출력
 for message in st.session_state.messages:
@@ -107,7 +107,7 @@ for message in st.session_state.messages:
 
 # 챗 기록 초기화 버튼
 def clear_chat_history():
-    st.session_state.messages = [{"role": "assistant", "content": "어떤 식당 찾고 있나요? 위치, 업종 등을 알려주시면 최고의 맛집 추천해드릴게요!"}]
+    st.session_state.messages = [{"role": "assistant", "content": "어떤 식당 찾으시나요?? 위치, 업종 등을 알려주시면 최고의 맛집 추천해드릴게요!"}]
 st.sidebar.button('대화 초기화 🔄', on_click=clear_chat_history)
 
 
