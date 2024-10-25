@@ -57,7 +57,7 @@ with st.sidebar:
     elif price == '😎 최고가':
         price = '최고가'
     elif price == '💸 고가':
-        price = '고가':
+        price = '고가'
     elif price == '💰 평균 가격대':
         price = '평균 가격대'
     elif price == '💵 중저가':
