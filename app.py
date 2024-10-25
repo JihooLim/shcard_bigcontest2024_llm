@@ -51,7 +51,20 @@ with st.sidebar:
 
 
     price = st.sidebar.selectbox("", ['👌 상관 없음','😎 최고가', '💸 고가', '💰 평균 가격대', '💵 중저가', '😂 저가'], key="price")
-    
+
+    if price == '👌 상관 없음':
+        price = '상관 없음'
+    elif price == '😎 최고가':
+        price = '최고가'
+    elif price == '💸 고가':
+        price = '고가':
+    elif price == '💰 평균 가격대':
+        price = '평균 가격대'
+    elif price == '💵 중저가':
+        price = '중저가'
+    elif price == '😂 저가':
+        price = '저가'
+        
     st.markdown(
         """
          <style>
@@ -145,15 +158,15 @@ def generate_response_with_faiss(question, df, embeddings, model, df_tour, embed
     if price == '상관 없음':
         filtered_df = filtered_df
     elif price == '최고가':
-        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('1')].reset_index(drop=True)
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('6')].reset_index(drop=True)
     elif price == '고가':
-        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('2')].reset_index(drop=True)
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('5')].reset_index(drop=True)
     elif price == '평균 가격대':
         filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('3'or '4')].reset_index(drop=True)
-    elif price == '중저가':
-        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('5')].reset_index(drop=True)
     elif price == '저가':
-        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('6')].reset_index(drop=True)
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('2')].reset_index(drop=True)
+    elif price == '최저가':
+        filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('1')].reset_index(drop=True)
  
 
     filtered_df = filtered_df.reset_index(drop=True).head(k)
