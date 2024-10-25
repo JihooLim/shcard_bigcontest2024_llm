@@ -49,20 +49,6 @@ with st.sidebar:
     
     st.sidebar.markdown('<p class="sidebar-text">💵희망 가격대는 어떻게 되시나요??</p>', unsafe_allow_html=True)
 
-    # radio 레이블 공백 제거
-    st.markdown(
-        """
-        <style>
-        .stSelectbox label {  /* This targets the label element for selectbox */
-            display: none;  /* Hides the label element */
-        }
-        .stSelectbox div[role='combobox'] {
-            margin-top: -20px; /* Adjusts the margin if needed */
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
 
     price = st.sidebar.selectbox("", ['👌 상관 없음','😎 최고가', '💸 고가', '💰 평균 가격대', '💵 중저가', '😂 저가'], key="price")
     
