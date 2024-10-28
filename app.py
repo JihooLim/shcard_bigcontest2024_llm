@@ -146,7 +146,7 @@ index_tour.add(embeddings_tour)
 def generate_response_with_faiss(question, df, embeddings, model, df_tour, embeddings_tour,max_count=10, k=3, print_prompt=True):
     index = load_faiss_index()
     query_embedding = embed_text(question).reshape(1, -1)
-    distances, indices = index.search(query_embedding, k * 100)
+    distances, indices = index.search(query_embedding, k * 10)
     
     query_embedding_tour = embed_text(question).reshape(1, -1)
     distances_tour, indices_tour = index_tour.search(query_embedding_tour, k)
