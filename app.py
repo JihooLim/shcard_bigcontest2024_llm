@@ -177,7 +177,7 @@ def generate_response_with_faiss(question, df, embeddings, model, df_tour, embed
     reference_info = "\n".join(filtered_df['text'])
     reference_tour = "\n".join(filtered_df_tour['text'])
 
-    prompt = f"""질문: {question}\n대답 시 필요한 내용: 근처 음식점을 추천할때는 질문에 주소에 대한 정보가 있다면 음식점의 주소가 비슷한지 확인해.\n차로 이동시간이 얼마인지 알려줘. 추천해줄때 이동시간을 고려해서 답변해줘.\n가맹점업종이 커피인 가게는 업종이 카페야. \n대답해줄때 업종별로 가능하면 하나씩 추천해줘. 그리고 추가적으로 그 중에서 가맹점개점일자가 오래되고 이용건수가 많은 음식점(오래된맛집)과 가맹점개점일자가 최근이고 이용건수가 많은 음식점(새로운맛집)을 각각 추천해줬으면 좋겠어.\n참고할 음식점 정보: {reference_info}\n참고할 관광지 정보: {reference_tour}\n응답:"""
+    prompt = f"""질문: {question}\n대답 시 필요한 내용: 특정 조건을 만족하는 음식점을 물어볼 때에는 데이터를 활용하여 해당 조건에 정확히 부합하는 음식점을 얘기해줘. 그외에 근처 음식점을 추천할때는 질문에 주소에 대한 정보가 있다면 음식점의 주소가 비슷한지 확인해.\n차로 이동시간이 얼마인지 알려줘. 추천해줄때 이동시간을 고려해서 답변해줘.\n가맹점업종이 커피인 가게는 업종이 카페야. \n대답해줄때 업종별로 가능하면 하나씩 추천해줘.\n참고할 음식점 정보: {reference_info}\n참고할 관광지 정보: {reference_tour}\n응답:"""
 
     if print_prompt:
         print('-----------------------------'*3)
