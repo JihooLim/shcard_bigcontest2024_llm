@@ -169,7 +169,7 @@ def generate_response_with_faiss(question, df, embeddings, model, df_tour, embed
         filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('1')].reset_index(drop=True)
  
 
-    filtered_df = filtered_df.reset_index(drop=True).head(k)
+    filtered_df = filtered_df.reset_index(drop=True)
     
     if filtered_df.empty:
         return "질문과 일치하는 가게가 없습니다."
@@ -177,7 +177,7 @@ def generate_response_with_faiss(question, df, embeddings, model, df_tour, embed
     reference_info = "\n".join(filtered_df['text'])
     reference_tour = "\n".join(filtered_df_tour['text'])
 
-    prompt = f"""질문: {question}\n응답시 참고사항: 질문에 주소에 대한 정보가 있다면 음식점의 주소가 비슷한지 확인해.\n가능하면 음식점들의 위도와 경도가 질문의 위도, 경도와 비교해서 가까운 곳으로 추천해줘야해. 차로 얼마나 걸릴지 알려줘. 대답할때 위도, 경도는 안 알려줘도 돼.\n대답해줄때 업종별로 가능하면 하나씩 추천해줘. 그리고 추가적으로 그 중에서 가맹점개점일자가 오래되고 이용건수가 많은 음식점(오래된맛집)과 가맹점개점일자가 최근이고 이용건수가 많은 음식점(새로운맛집)을 각각 추천해줬으면 좋겠어. 없다면 넘어가도 돼.\n참고할 음식점 정보: {reference_info}\n참고할 관광지 정보: {reference_tour}\n응답:"""
+    prompt = f"""질문: {question}\n대답 시 필요한 내용: 근처 음식점을 추천할때는 질문에 주소에 대한 정보가 있다면 음식점의 주소가 비슷한지 확인해.\n차로 이동시간이 얼마인지 알려줘. 추천해줄때 이동시간을 고려해서 답변해줘.\n가맹점업종이 커피인 가게는 업종이 카페야. \n대답해줄때 업종별로 가능하면 하나씩 추천해줘. 그리고 추가적으로 그 중에서 가맹점개점일자가 오래되고 이용건수가 많은 음식점(오래된맛집)과 가맹점개점일자가 최근이고 이용건수가 많은 음식점(새로운맛집)을 각각 추천해줬으면 좋겠어.\n참고할 음식점 정보: {reference_info}\n참고할 관광지 정보: {reference_tour}\n응답:"""
 
     if print_prompt:
         print('-----------------------------'*3)
