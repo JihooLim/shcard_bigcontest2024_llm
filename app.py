@@ -146,7 +146,7 @@ index_tour.add(embeddings_tour)
 def generate_response_with_faiss(question, df, embeddings, model, df_tour, embeddings_tour,max_count=10, k=3, print_prompt=True):
     index = load_faiss_index()
     query_embedding = embed_text(question).reshape(1, -1)
-    distances, indices = index.search(query_embedding, k * 10)
+    distances, indices = index.search(query_embedding, k * 3)
     
     query_embedding_tour = embed_text(question).reshape(1, -1)
     distances_tour, indices_tour = index_tour.search(query_embedding_tour, k)
@@ -169,7 +169,7 @@ def generate_response_with_faiss(question, df, embeddings, model, df_tour, embed
         filtered_df = filtered_df[filtered_df['건당평균이용금액구간'].str.startswith('1')].reset_index(drop=True)
  
 
-    filtered_df = filtered_df.reset_index(drop=True)
+    filtered_df = filtered_df.reset_index(drop=True).head(k)
     
     if filtered_df.empty:
         return "질문과 일치하는 가게가 없습니다."
@@ -177,7 +177,7 @@ def generate_response_with_faiss(question, df, embeddings, model, df_tour, embed
     reference_info = "\n".join(filtered_df['text'])
     reference_tour = "\n".join(filtered_df_tour['text'])
 
-    prompt = f"""질문: {question}\n대답 시 필요한 내용: 특정 조건을 만족하는 음식점을 물어볼 때에는 데이터를 활용하여 해당 조건에 정확히 부합하는 음식점을 얘기해줘. 그외에 근처 음식점을 추천할때는 질문에 주소에 대한 정보가 있다면 음식점의 주소가 비슷한지 확인해.\n차로 이동시간이 얼마인지 알려줘. 추천해줄때 이동시간을 고려해서 답변해줘.\n가맹점업종이 커피인 가게는 업종이 카페야. \n대답해줄때 업종별로 가능하면 하나씩 추천해줘.\n참고할 음식점 정보: {reference_info}\n참고할 관광지 정보: {reference_tour}\n응답:"""
+    prompt = f"""질문: {question}\n대답 시 필요한 내용: 특정 조건을 만족하는 음식점을 물어볼 때에는 보유한 데이터를 전부 활용하여 해당 조건에 정확히 부합하는 음식점을 얘기해줘. 그외에 근처 음식점을 추천할때는 질문에 주소에 대한 정보가 있다면 음식점의 주소와 동일한지 확인해.\n차로 이동시간이 얼마인지 알려줘. 추천해줄때 거리를 고려해서 답변해줘.\n가맹점업종이 커피인 가게는 업종이 카페야. \n조건에 부합하는 음식점을 찾는 질문이 아니면 가능한 한 업종별로 하나씩 추천해줘.\n참고할 음식점 정보: {reference_info}\n참고할 관광지 정보: {reference_tour}\n응답:"""
 
     if print_prompt:
         print('-----------------------------'*3)
